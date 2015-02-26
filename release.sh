@@ -1,6 +1,8 @@
-log() { echo -e "\e[33m$1\e[0m"; }
-fail() { echo -e "\e[31mRelease process failed\e[0m" && exit 1; }
-succeed() { echo -e "\e[32mRelease process succeeded\e[0m" && exit 0; }
+#!bin/bash
+
+log() { echo -e "$1"; }
+fail() { echo -e "Release process failed" && exit 1; }
+succeed() { echo -e "Release process succeeded" && exit 0; }
 
 composerjson=$1
 
@@ -17,13 +19,13 @@ log 'Installing dependencies...'
     composer require composer/composer dev-master --prefer-dist
     composer require claroline/bundle-recorder "~3.0" --prefer-dist
     
-    #if [ $composerjson = "min" ]; then
-    #    log "Copying composer min"
-		cp composer.json.min composer.json
-    #else
-    #    log "Copying composer full"
-    #    cp composer.json.full composer.json
-    #fi
+    if [ $composerjson =~ "min" ]; then
+        composerjson='full'
+    fi
+
+    log "Copying composer $composerjson"
+    cp composer.json.$composerjson composer.json
+
     
     cp app/config/parameters.yml.dist app/config/parameters.yml
     composer update --no-dev --prefer-dist -o
@@ -59,15 +61,16 @@ log 'Zipping and publishing release...'
     fi
     if [ -f "www/$releaseName.zip" ]; then
         time=$(date +%s)
-        releaseName="claroline-connect-$version-$time"
+        releaseName="claroline-connect-$version-$time-$composerjson"
     else
-        releaseName="claroline-connect-$version"
+        releaseName="claroline-connect-$version-$composerjson"
     fi
     mkdir "../$releaseName"
     cp -R * "../$releaseName/"
     cd ..
     zip -r "$releaseName.zip" $releaseName
-    cp "$releaseName.zip" ../www/log 'Removing tmp directory...'
+    cp "$releaseName.zip" ../www/
+log 'Removing tmp directory...'
     cd ..
     rm -r tmp
 
