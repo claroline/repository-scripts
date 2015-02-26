@@ -59,7 +59,7 @@ log 'Zipping and publishing release...'
         echo "Cannot found core bundle version"
         fail
     fi
-    if [ -f "www/$releaseName.zip" ]; then
+    if [ -f "releases/$releaseName.zip" ]; then
         time=$(date +%s)
         releaseName="claroline-connect-$version-$time-$composerjson"
     else
@@ -69,7 +69,7 @@ log 'Zipping and publishing release...'
     cp -R * "../$releaseName/"
     cd ..
     zip -r "$releaseName.zip" $releaseName
-    cp "$releaseName.zip" ../www/
+    cp "$releaseName.zip" ../releases/
 log 'Removing tmp directory...'
     cd ..
     rm -r tmp
