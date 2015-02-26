@@ -7,6 +7,6 @@ $version = $argv[2];
 
 if ($bundle === 'CoreBundle') {
     $release = __DIR__ . '/release.sh';
-    $res = shell_exec("sh $release min > scripts.log");
-    echo $res;
+    shell_exec("sh $release min > scripts.log");
+    shell_exec("sh $release full > scripts.log");
 }
