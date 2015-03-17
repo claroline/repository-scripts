@@ -17,11 +17,7 @@ log 'Downloading claroline/Claroline archive...'
     cd Claroline-master
 log 'Installing dependencies...'
     composer require composer/composer dev-master --prefer-dist
-    composer require claroline/bundle-recorder "~3.0" --prefer-dist
-    
-    if [ $composerjson =~ "min" ]; then
-        composerjson='full'
-    fi
+    composer require claroline/bundle-recorder "~4.0" --prefer-dist
 
     log "Copying composer $composerjson"
     cp composer.json.$composerjson composer.json
@@ -69,7 +65,9 @@ log 'Zipping and publishing release...'
     cp -R * "../$releaseName/"
     cd ..
     zip -r "$releaseName.zip" $releaseName
-    cp "$releaseName.zip" ../releases/
+    cp "$releaseName.zip" ../releases/$releaseName.zip
+    rm ../releases/last-$composerjson.zip
+    cp "$releaseName.zip" ../releases/last-$composerjson.zip
 log 'Removing tmp directory...'
     cd ..
     rm -r tmp
