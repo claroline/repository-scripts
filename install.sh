@@ -1,7 +1,7 @@
 #!bin/bash
 
 log() { echo -e "$1"; }
-succeed() { echo -e "Release process succeeded" && exit 0; }
+succeed() { echo -e "Dev install succeeded" && exit 0; }
 
 #trap fail ERR
 log 'Downloading claroline/Claroline archive...'
