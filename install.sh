@@ -21,7 +21,8 @@ log 'Installing dependencies...'
 log 'Adding placeholders...'
     touch app/cache/.gitkeep
     touch app/logs/.gitkeep
-
+log 'Removing operations file...'
+    rm app/config/operations.xml
 succeed
 
 
