@@ -1,7 +1,7 @@
 #!bin/bash
 
-log() { echo -e "$1"; }
-succeed() { echo -e "Dev install succeeded" && exit 0; }
+log() { echo "$1"; }
+succeed() { echo "Dev install succeeded" && exit 0; }
 
 #trap fail ERR
 log 'Downloading claroline/Claroline archive...'
@@ -23,6 +23,20 @@ log 'Adding placeholders...'
     touch app/logs/.gitkeep
 log 'Removing operations file...'
     rm app/config/operations.xml
+log 'Updating permissons...'
+    chmod -R 0777 app/cache
+    chmod -R 0777 app/sessions
+    chmod 0777 app/config
+    chmod 0777 app/config/bundles.ini
+    chmod 0777 app/config/parameters.yml
+    chmod 0777 app/config/platform_options.yml
+    chmod 0777 app/config/ips
+    chmod -R 0777 app/logs
+    chmod -R 0777 files
+    chmod 0777 templates #to be removed next release
+    chmod -R 0777 web/uploads
+    chmod -R 0777 web/uploads/logos
+    #these are some basic permissions. Feel dree to change them.
 succeed
 
 
