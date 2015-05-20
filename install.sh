@@ -12,10 +12,10 @@ log 'Downloading claroline/Claroline archive...'
     cd Claroline
 log 'Installing dependencies...'
     composer require composer/composer dev-master --prefer-source
-    composer require claroline/bundle-recorder "~4.0" --prefer-source
+    composer require claroline/bundle-recorder "~5.0" --prefer-source
 
     log "Copying composer min"
-    cp composer.json.min composer.json
+    cp composer.json.min-~5.0 composer.json
     cp app/config/parameters.yml.dist app/config/parameters.yml
     composer update --no-dev --prefer-source -o
 log 'Adding placeholders...'
