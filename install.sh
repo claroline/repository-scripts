@@ -33,9 +33,7 @@ log 'Updating permissons...'
     chmod 0777 app/config/ips
     chmod -R 0777 app/logs
     chmod -R 0777 files
-    chmod 0777 templates #to be removed next release
     chmod -R 0777 web/uploads
-    chmod -R 0777 web/uploads/logos
     #these are some basic permissions. Feel dree to change them.
 succeed
 
