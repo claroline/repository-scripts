@@ -17,7 +17,7 @@ log 'Downloading claroline/Claroline archive...'
     cd Claroline-master
 log 'Installing dependencies...'
     composer require composer/composer dev-master --prefer-dist
-    composer require claroline/bundle-recorder "~4.0" --prefer-dist
+    composer require claroline/bundle-recorder "~5.0" --prefer-dist
 
     log "Copying composer $composerjson"
     cp composer.json.$composerjson composer.json
