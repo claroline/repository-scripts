@@ -11,19 +11,14 @@ log 'Downloading claroline/Claroline archive...'
     rm master.zip
     cd Claroline
 log 'Installing dependencies...'
-    composer require composer/composer dev-master --prefer-source
-    composer require claroline/bundle-recorder "~5.0" --prefer-source
-
     log "Copying composer min"
-    cp composer.json.min composer.json
+    cp composer-min.json composer.json
     cp app/config/parameters.yml.dist app/config/parameters.yml
     composer update --no-dev --prefer-source -o
-log 'Adding placeholders...'
-    touch app/cache/.gitkeep
-    touch app/logs/.gitkeep
 log 'Removing operations file...'
     rm app/config/operations.xml
 log 'Updating permissons...'
+    # these are some basic permissions. Feel free to change them.
     chmod -R 0777 app/cache
     chmod -R 0777 app/sessions
     chmod 0777 app/config
@@ -34,7 +29,6 @@ log 'Updating permissons...'
     chmod -R 0777 app/logs
     chmod -R 0777 files
     chmod -R 0777 web/uploads
-    #these are some basic permissions. Feel dree to change them.
 succeed
 
 
