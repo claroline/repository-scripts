@@ -8,7 +8,7 @@ composerjson=$1
 
 #trap fail ERR
 log 'Creating tmp dir...'
-    rm -rf tmp 
+    rm -rf tmp
     mkdir tmp
     cd tmp
 log 'Downloading claroline/Claroline archive...'
@@ -16,13 +16,8 @@ log 'Downloading claroline/Claroline archive...'
     unzip master.zip
     cd Claroline-master
 log 'Installing dependencies...'
-    composer require composer/composer dev-master --prefer-dist
-    composer require claroline/bundle-recorder "~5.0" --prefer-dist
-
     log "Copying composer $composerjson"
-    cp composer.json.$composerjson composer.json
-
-    
+    cp composer-$composerjson.json composer.json
     cp app/config/parameters.yml.dist app/config/parameters.yml
     composer update --no-dev --prefer-dist -o
 log 'Removing dev files and adding placeholders...'
