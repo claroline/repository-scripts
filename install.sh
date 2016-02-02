@@ -15,6 +15,8 @@ log 'Installing dependencies...'
     cp composer-min.json composer.json
     cp app/config/parameters.yml.dist app/config/parameters.yml
     composer update --no-dev --prefer-source -o
+    npm install
+    npm run build
 log 'Removing operations file...'
     rm app/config/operations.xml
 log 'Updating permissons...'
