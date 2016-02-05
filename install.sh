@@ -5,7 +5,7 @@ succeed() { echo "Dev install succeeded" && exit 0; }
 
 #trap fail ERR
 log 'Downloading claroline/Claroline archive...'
-    wget https://github.com/claroline/Claroline/archive/master.zip
+    wget https://github.com/claroline/Claroline/archive/5.x.zip
     unzip master.zip
     mv Claroline-master Claroline
     rm master.zip
