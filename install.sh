@@ -1,7 +1,13 @@
 #!bin/bash
 
+programs=("node" "npm")
+
 log() { echo "$1"; }
 succeed() { echo "Dev install succeeded" && exit 0; }
+
+for name in ${programs[@]}; do
+    command -v $name >/dev/null 2>&1 || { echo "I require $name but it's not installed. Aborting." >&2; exit 1; }
+done
 
 #trap fail ERR
 log 'Downloading claroline/Claroline archive...'
@@ -29,6 +35,7 @@ log 'Updating permissons...'
     chmod -R 0777 app/logs
     chmod -R 0777 files
     chmod -R 0777 web/uploads
+log 'Generating themes'
+    npm install
+    npm run build
 succeed
-
-
