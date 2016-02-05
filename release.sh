@@ -8,11 +8,11 @@ composerjson=$1
 
 #trap fail ERR
 log 'Creating tmp dir...'
-    rm -rf tmp 
+    rm -rf tmp
     mkdir tmp
     cd tmp
 log 'Downloading claroline/Claroline archive...'
-    wget https://github.com/claroline/Claroline/archive/master.zip
+    wget https://github.com/claroline/Claroline/archive/5.x.zip
     unzip master.zip
     cd Claroline-master
 log 'Installing dependencies...'
@@ -22,7 +22,7 @@ log 'Installing dependencies...'
     log "Copying composer $composerjson"
     cp composer.json.$composerjson composer.json
 
-    
+
     cp app/config/parameters.yml.dist app/config/parameters.yml
     composer update --no-dev --prefer-dist -o
 log 'Removing dev files and adding placeholders...'
@@ -73,5 +73,4 @@ log 'Removing tmp directory...'
     rm -r tmp
 
 succeed
-
 
